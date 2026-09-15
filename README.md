@@ -1,98 +1,296 @@
 # AI File Processing Automation with Make.com
 
-AI-powered file processing automation built with Make.com, OpenAI, Gmail, Google Drive, and Google Sheets.
+> **Working Proof of Concept | AI Automation Portfolio Project**
 
-> **Portfolio Project | Proof of Concept**
+An AI-powered file processing workflow built with **Make.com** that automatically receives email attachments, validates supported file types, processes documents and images with the **OpenAI API**, generates structured metadata, stores processed files in **Google Drive**, records information in **Google Sheets**, and sends automated email notifications.
+
+The project demonstrates practical **workflow automation, AI/API integration, file processing, data handling, routing, and error handling**.
+
+---
 
 ## Overview
 
-<!-- Brief explanation of the project and the problem it solves. -->
+Many document-processing workflows involve repetitive manual tasks such as:
+
+* Receiving files through email
+* Identifying file types
+* Renaming documents
+* Extracting useful information
+* Organizing files
+* Recording document information
+* Notifying users about processing results
+
+This project automates that workflow using Make.com and AI.
+
+### High-Level Workflow
+
+```text
+Gmail
+  │
+  ▼
+Retrieve Attachments
+  │
+  ▼
+Validate File Type
+  │
+  ├─────────────── Supported ───────────────┐
+  │                                        │
+  │                                        ▼
+  │                                  OpenAI Processing
+  │                                        │
+  │                                        ▼
+  │                                Structured Metadata
+  │                                  │             │
+  │                                  ▼             ▼
+  │                            Google Drive   Google Sheets
+  │                                  │
+  │                                  ▼
+  │                            Gmail Notification
+  │
+  └──────────── Unsupported ───────────────► Rejection Notification
+```
+
+---
 
 ## Problem
 
-<!-- Describe the manual or repetitive process this automation addresses. -->
+Processing incoming email attachments manually can require several repetitive steps:
+
+1. Download the attachment.
+2. Determine whether the file can be processed.
+3. Identify the type and purpose of the document.
+4. Rename the file consistently.
+5. Store the file in the appropriate location.
+6. Record useful metadata.
+7. Notify the appropriate recipient.
+
+When multiple attachments arrive in a single email, these tasks become even more repetitive.
+
+---
 
 ## Solution
 
-<!-- Describe the automated solution at a high level. -->
+This automation creates an end-to-end file processing pipeline.
 
-## Workflow
+When an email containing attachments arrives, the workflow:
 
-<!-- Add the final workflow architecture diagram here. -->
+1. Detects the incoming email.
+2. Retrieves its attachments.
+3. Processes multiple attachments independently.
+4. Validates the file type.
+5. Routes supported and unsupported files separately.
+6. Sends supported files to OpenAI for AI processing.
+7. Generates structured document metadata.
+8. Creates a standardized filename.
+9. Stores the processed file in Google Drive.
+10. Records processing information in Google Sheets.
+11. Sends an automated processing result through Gmail.
+12. Rejects unsupported files through a separate notification path.
+
+---
 
 ## Key Capabilities
 
-* <!-- Capability 1 -->
-* <!-- Capability 2 -->
-* <!-- Capability 3 -->
-* <!-- Capability 4 -->
-* <!-- Capability 5 -->
-* <!-- Capability 6 -->
+* 📧 Automated email attachment processing
+* 📎 Multiple attachment handling
+* 🔀 Supported/unsupported file routing
+* 🤖 AI-powered document and image processing
+* 🏷️ Automated file naming
+* 📄 PDF and DOCX processing
+* 🖼️ JPG and WEBP image processing
+* ☁️ Google Drive file storage
+* 📊 Google Sheets metadata logging
+* 📬 Automated Gmail notifications
+* ⚠️ Unsupported-file handling
+* 🧪 Proof-of-concept testing
+
+---
 
 ## Supported File Types
 
-| File Type           | Status      |
-| ------------------- | ----------- |
-| PDF                 | ✅ Supported |
-| DOCX                | ✅ Supported |
-| JPG                 | ✅ Supported |
-| WEBP                | ✅ Supported |
-| Unsupported formats | ❌ Rejected  |
+| File Type                 | Processing  |
+| ------------------------- | ----------- |
+| PDF                       | ✅ Supported |
+| DOCX                      | ✅ Supported |
+| JPG                       | ✅ Supported |
+| WEBP                      | ✅ Supported |
+| Other/Unsupported Formats | ❌ Rejected  |
+
+The workflow validates files before sending them to the appropriate processing path.
+
+---
 
 ## AI Processing
 
-<!-- Explain what OpenAI does within the workflow. -->
+The OpenAI API is used to analyze supported files and return structured information.
 
-### Structured Output
+The workflow extracts or generates fields including:
 
-<!-- Document the information extracted/generated by the AI. -->
+| Field                 | Purpose                                                |
+| --------------------- | ------------------------------------------------------ |
+| `document_type`       | Identifies the general type of document                |
+| `subject`             | Identifies the document subject                        |
+| `source_organization` | Identifies the originating organization when available |
+| `document_date`       | Identifies the relevant document date                  |
+| `new_filename`        | Generates a standardized filename                      |
+| `summary`             | Provides a concise document summary                    |
+
+### Example
+
+A document such as a Babylist birth plan can produce metadata similar to:
+
+```text
+Document Type: Birth Plan
+Source Organization: Babylist
+New Filename: Birth_Plan_Babylist.pdf
+Summary: ...
+```
+
+The structured output can then be passed to downstream automation steps.
+
+---
 
 ## Automation Flow
 
-<!-- Brief step-by-step description of the workflow. -->
+### 1. Monitor Gmail
 
-1. <!-- Step 1 -->
-2. <!-- Step 2 -->
-3. <!-- Step 3 -->
-4. <!-- Step 4 -->
-5. <!-- Step 5 -->
-6. <!-- Step 6 -->
+The workflow monitors Gmail for incoming messages containing attachments.
 
-## Proof of Concept
+### 2. Retrieve Attachments
 
-<!-- Add screenshots and execution evidence. -->
+Attachments are retrieved from the incoming email.
 
-## Testing
+### 3. Process Multiple Attachments
 
-<!-- Summarize testing results and link to docs/testing.md. -->
+An Iterator allows attachments to be processed independently instead of treating the email as a single file-processing operation.
 
-[View Testing Documentation](docs/testing.md)
+### 4. Validate and Route Files
 
-## Error Handling
+The workflow determines whether each attachment belongs to a supported file type.
 
-<!-- Brief explanation of how failures and unsupported files are handled. -->
+Supported files continue to AI processing.
 
-## Technology Stack
+Unsupported files follow a rejection/notification path.
 
-| Technology    | Purpose                       |
-| ------------- | ----------------------------- |
-| Make.com      | Workflow automation           |
-| OpenAI API    | AI-powered file processing    |
-| Gmail         | Email input and notifications |
-| Google Drive  | File storage                  |
-| Google Sheets | Metadata logging              |
+### 5. Process with OpenAI
+
+Supported documents and images are sent to the OpenAI processing stage.
+
+The AI generates structured metadata for downstream modules.
+
+### 6. Store the File
+
+Processed files are stored in Google Drive using the generated filename.
+
+### 7. Record Metadata
+
+Important processing information is recorded in Google Sheets.
+
+### 8. Send the Result
+
+Gmail sends an automated notification containing the processing result.
+
+---
 
 ## Architecture
 
-[View Architecture Documentation](docs/architecture.md)
+The automation is organized into several logical stages:
 
-## Implementation
+```text
+┌─────────────────────┐
+│        Gmail        │
+│   Incoming Email    │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  List Attachments   │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│      Iterator       │
+│ Process Each File   │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│   File Validation   │
+└──────────┬──────────┘
+           │
+       ┌───┴────┐
+       │        │
+       ▼        ▼
+  Supported  Unsupported
+       │        │
+       ▼        ▼
+   OpenAI     Gmail
+       │      Rejection
+       ▼
+Structured Output
+       │
+   ┌───┴─────────┐
+   ▼             ▼
+Google Drive  Google Sheets
+   │
+   ▼
+ Gmail Result
+```
 
-[View Implementation Guide](docs/implementation.md)
+For a detailed explanation of the architecture, see:
 
-## Design Decisions
+**[Architecture Documentation](docs/architecture.md)**
 
-[View Design Decisions](docs/decisions.md)
+---
+
+## Proof of Concept
+
+This project was implemented and tested as a working Make.com scenario.
+
+The proof of concept demonstrates:
+
+* Successful PDF processing
+* Successful DOCX processing
+* Successful JPG processing
+* Successful WEBP processing
+* Multiple attachment processing
+* Unsupported file handling
+* AI-generated structured output
+* Google Drive storage
+* Google Sheets logging
+* Automated Gmail notifications
+
+Screenshots and detailed test results are documented in:
+
+**[Testing & Proof of Concept](docs/testing.md)**
+
+---
+
+## Error and Unsupported File Handling
+
+The workflow does not assume that every incoming attachment can be processed.
+
+Unsupported files are routed away from the AI processing path and handled through a separate notification flow.
+
+This prevents unsupported inputs from unnecessarily reaching downstream processing modules.
+
+Additional implementation and design decisions are documented in:
+
+**[Design Decisions](docs/decisions.md)**
+
+---
+
+## Technology Stack
+
+| Technology        | Purpose                                        |
+| ----------------- | ---------------------------------------------- |
+| **Make.com**      | Workflow automation and orchestration          |
+| **OpenAI API**    | AI-powered file analysis and structured output |
+| **Gmail**         | Email input, attachments, and notifications    |
+| **Google Drive**  | Processed file storage                         |
+| **Google Sheets** | Metadata and processing records                |
+
+---
 
 ## Project Structure
 
@@ -100,29 +298,91 @@ AI-powered file processing automation built with Make.com, OpenAI, Gmail, Google
 make-ai-file-processing-automation/
 │
 ├── README.md
+│
 ├── docs/
+│   ├── architecture.md
+│   ├── implementation.md
+│   ├── testing.md
+│   └── decisions.md
+│
 ├── screenshots/
+│
 ├── sample-data/
+│   └── README.md
+│
 └── .gitignore
 ```
 
+### Documentation
+
+| Document                                 | Purpose                                    |
+| ---------------------------------------- | ------------------------------------------ |
+| [Architecture](docs/architecture.md)     | System architecture and data flow          |
+| [Implementation](docs/implementation.md) | Implementation and configuration guide     |
+| [Testing](docs/testing.md)               | Test cases and proof-of-concept results    |
+| [Design Decisions](docs/decisions.md)    | Important technical and workflow decisions |
+
+---
+
 ## Security & Privacy
 
-<!-- Explain how credentials, API keys, and personal/private information are protected. -->
+This repository should contain only safe demonstration material.
+
+Do not commit:
+
+* API keys
+* Passwords
+* OAuth tokens
+* Credentials
+* Private documents
+* Personal email content
+* Personally identifiable information
+* Confidential business information
+
+Screenshots should be reviewed before publication to ensure sensitive information is not exposed.
+
+---
 
 ## Lessons Learned
 
-<!-- Document key technical and practical lessons from building the automation. -->
+This project provided practical experience with:
+
+* Designing multi-step automation workflows
+* Connecting multiple SaaS platforms
+* Integrating an AI API into an automation
+* Processing different file types
+* Handling multiple attachments
+* Routing different processing conditions
+* Working with structured AI output
+* Passing data between automation modules
+* Designing unsupported-input handling
+* Testing automation behavior across multiple scenarios
+
+---
 
 ## Future Improvements
 
-<!-- Potential improvements that could be implemented in a future version. -->
+Potential future improvements include:
+
+* Additional document formats
+* More advanced document classification
+* Improved confidence/error reporting
+* Human approval workflows
+* Duplicate-file detection
+* Enhanced logging
+* Retry mechanisms
+* Additional storage and notification integrations
+* More sophisticated document routing
+
+---
 
 ## Project Status
 
-**Status: Completed — Working Proof of Concept**
+**Completed — Working Proof of Concept**
 
 The automation has been built and tested in Make.com.
+
+This repository documents the project architecture, implementation approach, testing results, and design decisions.
 
 ---
 
@@ -130,4 +390,4 @@ The automation has been built and tested in Make.com.
 
 **Ariel Calangian**
 
-This project was created as part of an AI Automation portfolio to demonstrate practical workflow automation, AI/API integration, file processing, testing, and error handling.
+AI Automation Portfolio Project
