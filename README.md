@@ -33,7 +33,7 @@ Retrieve Attachments
   ▼
 Validate File Type
   │
-  ├─────────────── Supported ───────────────┐
+  ├─────────────── Supported ──────────────┐
   │                                        │
   │                                        ▼
   │                                  OpenAI Processing
@@ -245,24 +245,24 @@ For a detailed explanation of the architecture, see:
 
 ## Proof of Concept
 
-This project was implemented and tested as a working Make.com scenario.
+The automation was implemented and tested in Make.com.
 
-The proof of concept demonstrates:
+![Workflow Overview](screenshots/workflow-overview.png)
 
-* Successful PDF processing
-* Successful DOCX processing
-* Successful JPG processing
-* Successful WEBP processing
-* Multiple attachment processing
-* Unsupported file handling
-* AI-generated structured output
-* Google Drive storage
-* Google Sheets logging
-* Automated Gmail notifications
+The proof of concept successfully demonstrates:
 
-Screenshots and detailed test results are documented in:
+- PDF processing
+- DOCX processing
+- JPG processing
+- WEBP processing
+- Multiple attachment handling
+- Unsupported file handling
+- AI-generated structured output
+- Google Drive storage
+- Google Sheets logging
+- Gmail notifications
 
-**[Testing & Proof of Concept](docs/testing.md)**
+[View detailed testing documentation](docs/testing.md)
 
 ---
 
