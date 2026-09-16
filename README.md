@@ -2,27 +2,27 @@
 
 > **Working Proof of Concept | AI Automation Portfolio Project**
 
-An AI-powered file processing workflow built with **Make.com** that automatically receives email attachments, validates supported file types, processes documents and images with the **OpenAI API**, generates structured metadata, stores processed files in **Google Drive**, records information in **Google Sheets**, and sends automated email notifications.
+An AI-powered file processing workflow built with **Make.com, OpenAI, Gmail, Google Drive, and Google Sheets**.
 
-The project demonstrates practical **workflow automation, AI/API integration, file processing, data handling, routing, and error handling**.
+The automation receives email attachments, validates supported file types, processes documents and images with AI, generates structured metadata and standardized filenames, stores processed files, records processing information, and sends automated notifications.
 
----
+## Why This Project?
 
-## Overview
+This project demonstrates how a repetitive file-processing workflow can be transformed into an automated AI-assisted pipeline.
 
-Many document-processing workflows involve repetitive manual tasks such as:
+### Core Capabilities
 
-* Receiving files through email
-* Identifying file types
-* Renaming documents
-* Extracting useful information
-* Organizing files
-* Recording document information
-* Notifying users about processing results
+* 🤖 AI-powered document and image processing
+* 🔀 Conditional file routing
+* 📎 Multiple attachment handling
+* 🏷️ Automated file naming
+* ☁️ Automated file storage
+* 📊 Structured metadata logging
+* 📧 Automated notifications
+* ⚠️ Unsupported-file handling
+* 🧪 Tested working proof of concept
 
-This project automates that workflow using Make.com and AI.
-
-### High-Level Workflow
+## Workflow at a Glance
 
 ```text
 Gmail
@@ -31,15 +31,19 @@ Gmail
 Retrieve Attachments
   │
   ▼
-Validate File Type
+Iterator
   │
-  ├─────────────── Supported ──────────────┐
+  ▼
+File Validation
+  │
+  ├─────────────── Supported ───────────────┐
   │                                        │
   │                                        ▼
-  │                                  OpenAI Processing
+  │                                   OpenAI AI
+  │                                    Processing
   │                                        │
   │                                        ▼
-  │                                Structured Metadata
+  │                                Structured Output
   │                                  │             │
   │                                  ▼             ▼
   │                            Google Drive   Google Sheets
@@ -47,62 +51,18 @@ Validate File Type
   │                                  ▼
   │                            Gmail Notification
   │
-  └──────────── Unsupported ───────────────► Rejection Notification
+  └──────────── Unsupported ───────────────► Gmail Rejection
 ```
 
----
+## Project Documentation
 
-## Problem
+| Document                                 | Purpose                                 |
+| ---------------------------------------- | --------------------------------------- |
+| [Architecture](docs/architecture.md)     | Understand the system and data flow     |
+| [Implementation](docs/implementation.md) | Understand how to recreate the workflow |
+| [Testing](docs/testing.md)               | Review proof-of-concept testing         |
+| [Design Decisions](docs/decisions.md)    | Understand key design choices           |
 
-Processing incoming email attachments manually can require several repetitive steps:
-
-1. Download the attachment.
-2. Determine whether the file can be processed.
-3. Identify the type and purpose of the document.
-4. Rename the file consistently.
-5. Store the file in the appropriate location.
-6. Record useful metadata.
-7. Notify the appropriate recipient.
-
-When multiple attachments arrive in a single email, these tasks become even more repetitive.
-
----
-
-## Solution
-
-This automation creates an end-to-end file processing pipeline.
-
-When an email containing attachments arrives, the workflow:
-
-1. Detects the incoming email.
-2. Retrieves its attachments.
-3. Processes multiple attachments independently.
-4. Validates the file type.
-5. Routes supported and unsupported files separately.
-6. Sends supported files to OpenAI for AI processing.
-7. Generates structured document metadata.
-8. Creates a standardized filename.
-9. Stores the processed file in Google Drive.
-10. Records processing information in Google Sheets.
-11. Sends an automated processing result through Gmail.
-12. Rejects unsupported files through a separate notification path.
-
----
-
-## Key Capabilities
-
-* 📧 Automated email attachment processing
-* 📎 Multiple attachment handling
-* 🔀 Supported/unsupported file routing
-* 🤖 AI-powered document and image processing
-* 🏷️ Automated file naming
-* 📄 PDF and DOCX processing
-* 🖼️ JPG and WEBP image processing
-* ☁️ Google Drive file storage
-* 📊 Google Sheets metadata logging
-* 📬 Automated Gmail notifications
-* ⚠️ Unsupported-file handling
-* 🧪 Proof-of-concept testing
 
 ---
 
