@@ -36,7 +36,7 @@ Iterator
   ▼
 File Validation
   │
-  ├─────────────── Supported ───────────────┐
+  ├─────────────── Supported ──────────────┐
   │                                        │
   │                                        ▼
   │                                   OpenAI AI
