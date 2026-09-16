@@ -53,16 +53,40 @@ File Validation
   │
   └──────────── Unsupported ───────────────► Gmail Rejection
 ```
+## Problem
 
-## Project Documentation
+Processing incoming email attachments manually can require several repetitive steps:
 
-| Document                                 | Purpose                                 |
-| ---------------------------------------- | --------------------------------------- |
-| [Architecture](docs/architecture.md)     | Understand the system and data flow     |
-| [Implementation](docs/implementation.md) | Understand how to recreate the workflow |
-| [Testing](docs/testing.md)               | Review proof-of-concept testing         |
-| [Design Decisions](docs/decisions.md)    | Understand key design choices           |
+1. Download the attachment.
+2. Determine whether the file can be processed.
+3. Identify the type and purpose of the document.
+4. Rename the file consistently.
+5. Store the file in the appropriate location.
+6. Record useful metadata.
+7. Notify the appropriate recipient.
 
+When multiple attachments arrive in a single email, these tasks become even more repetitive.
+
+---
+
+## Solution
+
+This automation creates an end-to-end file processing pipeline.
+
+When an email containing attachments arrives, the workflow:
+
+1. Detects the incoming email.
+2. Retrieves its attachments.
+3. Processes multiple attachments independently.
+4. Validates the file type.
+5. Routes supported and unsupported files separately.
+6. Sends supported files to OpenAI for AI processing.
+7. Generates structured document metadata.
+8. Creates a standardized filename.
+9. Stores the processed file in Google Drive.
+10. Records processing information in Google Sheets.
+11. Sends an automated processing result through Gmail.
+12. Rejects unsupported files through a separate notification path.
 
 ---
 
